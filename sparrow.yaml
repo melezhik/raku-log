@@ -15,15 +15,12 @@
     name: smoke-test
     language: Raku
     code: |
-
       use Logger;
+      my $log = Logger.new;
+      # by default the log level is INFO and the output is $*OUT (can be any IO::Handle)
+      # Logger.new(level => Logger::DEBUG, output => $*ERR)
+      # log a message
+      $log.info('info message');
 
-        my $log = Logger.new;
-        # by default the log level is INFO and the output is $*OUT (can be any IO::Handle)
-        # Logger.new(level => Logger::DEBUG, output => $*ERR)
-        # log a message
-        $log.info('info message');
-      
     check: |
       info message
-    
