@@ -1,0 +1,29 @@
+- tasks:
+  -
+    name: install-and-test
+    default: true
+    language: Bash
+    code: |
+      set -e
+      cd source
+      zef install --deps-only --/test .
+      zef test .
+    followup:
+      -
+        name: smoke-test
+  -
+    name: smoke-test
+    language: Raku
+    code: |
+
+      use Logger;
+
+        my $log = Logger.new;
+        # by default the log level is INFO and the output is $*OUT (can be any IO::Handle)
+        # Logger.new(level => Logger::DEBUG, output => $*ERR)
+        # log a message
+        $log.info('info message');
+      
+    check: |
+      info message
+    
